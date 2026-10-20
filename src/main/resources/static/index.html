@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#122b3f"><title>NODO | Centro de inventario</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#inicio"><span class="brand-symbol"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 29V11h4l14 12V11h4v18h-4L13 17v12z" fill="currentColor"/></svg></span><span class="brand-word">NODO<span>INVENTARIO INTELIGENTE</span></span></a>
+    <div class="workspace"><span class="workspace-mark">T</span><span><b>Tienda tecnológica</b><small>Operaciones · Santiago</small></span><span class="chevron">⌄</span></div>
+    <p class="nav-label">ESPACIO DE TRABAJO</p>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <button class="nav-item active" data-section="inicio"><span class="nav-icon">◫</span>Resumen<span class="nav-active"></span></button>
+      <button class="nav-item" data-section="productos"><span class="nav-icon">▦</span>Inventario<span class="nav-count" id="navProductCount">10</span></button>
+      <button class="nav-item" data-section="alertas"><span class="nav-icon">⌁</span>Reposición<span class="nav-count alert-count" id="navAlertCount">4</span></button>
+    </nav>
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-help"><div class="help-icon">?</div><div><b>Centro de ayuda</b><small>Guía rápida del proyecto</small></div><span>↗</span></div>
+    <div class="user-block"><div class="avatar">OP</div><div><b>Operaciones</b><small>Administrador</small></div><span class="user-menu">•••</span></div>
+  </aside>
+
+  <main class="main-area" id="inicio">
+<header class="topbar"><div class="breadcrumbs"><span>Operaciones</span><i>/</i><b>Centro de inventario</b></div><div class="top-actions"><div class="system-status"><span></span><b id="connectionLabel">Conectando</b><small>Estado de base de datos</small></div><button class="icon-button" id="refreshButton" aria-label="Actualizar datos" title="Actualizar">↻</button><div class="top-avatar">OP</div></div></header>
+    <div class="page-content">
+      <section class="page-heading"><div><p class="eyebrow"><span class="eyebrow-dot"></span>VISTA GENERAL</p><h1>Centro de inventario</h1><p class="page-subtitle">Una lectura clara de lo que tienes, lo que falta y lo que debes mover.</p></div><button class="primary-button" id="newOrderButton"><span>＋</span> Registrar pedido</button></section>
+
+      <section class="kpi-grid" aria-label="Indicadores de inventario">
+        <article class="kpi-card"><div class="kpi-top"><span>REFERENCIAS ACTIVAS</span><span class="kpi-icon icon-blue">▦</span></div><div class="kpi-number" id="productCount">—</div><div class="kpi-bottom"><span class="kpi-caption">Productos en catálogo</span><span class="micro-trend">10 <i>↗</i></span></div><svg class="spark spark-blue" viewBox="0 0 120 36" preserveAspectRatio="none"><path d="M1 30 C18 27 22 32 36 22 S55 24 69 14 S88 18 101 8 S113 12 119 4"/></svg></article>
+        <article class="kpi-card kpi-warning"><div class="kpi-top"><span>BAJO STOCK MÍNIMO</span><span class="kpi-icon icon-amber">!</span></div><div class="kpi-number" id="criticalCount">—</div><div class="kpi-bottom"><span class="kpi-caption">Necesitan reposición</span><span class="pill-warn"><span></span>Revisar</span></div><svg class="spark spark-amber" viewBox="0 0 120 36" preserveAspectRatio="none"><path d="M1 9 C16 12 22 5 36 17 S55 11 69 24 S89 17 101 29 S113 23 119 33"/></svg></article>
+        <article class="kpi-card"><div class="kpi-top"><span>UNIDADES DISPONIBLES</span><span class="kpi-icon icon-teal">⇩</span></div><div class="kpi-number" id="unitCount">—</div><div class="kpi-bottom"><span class="kpi-caption">Existencias registradas</span><span class="micro-trend">unidades</span></div><svg class="spark spark-teal" viewBox="0 0 120 36" preserveAspectRatio="none"><path d="M1 28 C17 25 20 29 35 20 S55 24 70 13 S86 18 100 11 S112 9 119 5"/></svg></article>
+        <article class="kpi-card"><div class="kpi-top"><span>VALOR REFERENCIAL</span><span class="kpi-icon icon-violet">$</span></div><div class="kpi-number value-number" id="inventoryValue">—</div><div class="kpi-bottom"><span class="kpi-caption">Precio por existencias</span><span class="micro-trend">CLP</span></div><svg class="spark spark-violet" viewBox="0 0 120 36" preserveAspectRatio="none"><path d="M1 29 C15 28 22 18 36 23 S51 24 67 13 S84 16 98 7 S112 11 119 4"/></svg></article>
+      </section>
+
+      <section class="insight-grid">
+        <article class="panel stock-panel"><div class="panel-heading"><div><p class="eyebrow">LECTURA DEL CATÁLOGO</p><h2>Estado de existencias</h2></div><span class="period-tag">Ahora <span>⌄</span></span></div><div class="stock-overview"><div class="donut-wrap"><div class="donut" id="stockDonut"><div class="donut-center"><strong id="donutTotal">10</strong><span>productos</span></div></div></div><div class="stock-legend"><div><span class="legend-dot dot-healthy"></span><span>En rango</span><b id="healthyCount">—</b></div><div><span class="legend-dot dot-critical"></span><span>Bajo mínimo</span><b id="legendCritical">—</b></div><small>Se considera crítico cuando stock actual es menor al mínimo.</small></div></div><div class="category-block"><div class="category-heading"><b>Cobertura por categoría</b><span>unidades / mínimo</span></div><div id="categoryBars" class="category-bars"></div></div></article>
+        <article class="panel alert-panel" id="alertas"><div class="panel-heading"><div><p class="eyebrow">ATENCIÓN PRIORITARIA</p><h2>Reposición sugerida</h2></div><span class="alert-total" id="alertTotal">0</span></div><p class="panel-description">Referencias que ya están por debajo del umbral configurado.</p><div id="alertList" class="alert-list"></div><button class="text-button" data-section="productos">Ver todo el inventario <span>→</span></button></article>
+      </section>
+
+      <section class="inventory-section" id="productos"><div class="inventory-heading"><div><p class="eyebrow">CATÁLOGO DE PRODUCTOS</p><h2>Inventario</h2></div><div class="inventory-tools"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Producto, categoría o proveedor"></label><select id="categorySelect" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option></select><select id="stockSelect" aria-label="Filtrar por estado"><option value="">Todos los estados</option><option value="critical">Bajo mínimo</option><option value="healthy">En rango</option></select></div></div>
+        <div class="table-card"><div class="table-scroll"><table><thead><tr><th>PRODUCTO</th><th>CATEGORÍA</th><th>PROVEEDOR</th><th>DISPONIBILIDAD</th><th>PRECIO UNITARIO</th><th>ESTADO</th><th></th></tr></thead><tbody id="productRows"><tr><td colspan="7" class="loading">Cargando inventario…</td></tr></tbody></table></div><div class="table-footer"><span id="tableSummary">—</span><span>Datos del proyecto · actualización en vivo</span></div></div>
+      </section>
+      <footer class="page-footer"><span>NODO <i>·</i> Prototipo de gestión de inventario</span><span>Regla de alerta: stock actual &lt; stock mínimo</span></footer>
+    </div>
+  </main>
+</div>
+<dialog id="orderDialog"><form method="dialog" id="orderForm"><button class="dialog-close" value="cancel" aria-label="Cerrar">×</button><div class="dialog-mark">＋</div><p class="eyebrow">OPERACIÓN DE INVENTARIO</p><h2 id="orderProductName">Registrar pedido</h2><p id="orderStockInfo" class="dialog-info">Selecciona el producto y las unidades.</p><label>Cliente<select id="customerSelect"><option value="1">Juan Pérez</option><option value="2">María Soto</option><option value="3">Diego Rojas</option><option value="4">Camila Vidal</option><option value="5">Sofía Torres</option></select></label><label id="productField">Producto<select id="orderProductSelect"></select></label><label>Cantidad<input id="quantityInput" type="number" value="1" min="1" required></label><p id="orderMessage" class="message" role="status"></p><div class="dialog-actions"><button class="secondary-button" value="cancel">Cancelar</button><button class="primary-button" id="submitOrder" type="submit">Confirmar pedido <span>→</span></button></div></form></dialog>
+<div id="toast" class="toast" role="status"></div><script src="app.js"></script>
+</body></html>
